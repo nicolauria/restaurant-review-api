@@ -131,7 +131,7 @@ router.put('/:reviewId', upload.single('imgFile'), passport.authenticate('jwt', 
       image: req.file,
       lastEdited: Date.now()
     });
-    
+
     review.save().then(review => res.send(review));
   })
 })
@@ -141,6 +141,7 @@ router.put('/:reviewId', upload.single('imgFile'), passport.authenticate('jwt', 
 // @access  Private
 router.delete('/:reviewId', passport.authenticate('jwt', { session: false }), (req, res) => {
   Review.findById(req.params.reviewId).then(review => {
+    let errors = {};
 
     // validate that current user is author of requested review
     if (review.user.toString() !== req.user.id) {
