@@ -8,7 +8,7 @@ module.exports = function validateReviewInput(data) {
   data.address = !isEmpty(data.address) ? data.address : '';
 
   if (!Validator.isLength(data.text, { min: 25, max: 1000 })) {
-    errors.email = 'Review must be at least 25 characters';
+    errors.text = 'Review must be at least 25 characters';
   }
 
   if (Validator.isEmpty(data.address)) {
